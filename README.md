@@ -114,8 +114,6 @@ T:26C H:59%
 
 ---
 
-## آنچه در رزومه بنویسید
-
 > Designed a complete FPGA-based embedded sensor hub in VHDL on Xilinx Artix-7 (Basys3),
 > implementing SPI master controller for BME280 environmental sensor, UART serial interface
 > at 115200 bps, 8-bit PWM generator for LED control, and a hierarchical FSM-based
