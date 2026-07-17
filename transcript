@@ -1,0 +1,163 @@
+# Reading pref.tcl
+# //  ModelSim SE-64 2020.4 Oct 13 2020
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project sensor hub
+# Compile of pwm_gen.vhd was successful.
+# Compile of sensor_ctrl.vhd was successful.
+# Compile of spi_master.vhd was successful.
+# Compile of top.vhd was successful.
+# Compile of uart_rx.vhd was successful.
+# Compile of uart_tx.vhd was successful.
+# 6 compiles, 0 failed with no errors.
+do tb/run_sim.do
+# Model Technology ModelSim SE-64 vmap 2020.4 Lib Mapping Utility 2020.10 Oct 13 2020
+# vmap work work 
+# Copying C:/modeltech64_2020.4/win64/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# >>> Compiling source files...
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:47 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/uart_tx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_tx
+# -- Compiling architecture Behavioral of uart_tx
+# End time: 20:17:47 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:47 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/uart_rx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity uart_rx
+# -- Compiling architecture Behavioral of uart_rx
+# End time: 20:17:47 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:47 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/spi_master.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity spi_master
+# -- Compiling architecture Behavioral of spi_master
+# End time: 20:17:47 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:47 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/pwm_gen.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity pwm_gen
+# -- Compiling architecture Behavioral of pwm_gen
+# End time: 20:17:47 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:47 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/sensor_ctrl.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity sensor_ctrl
+# -- Compiling architecture Behavioral of sensor_ctrl
+# End time: 20:17:48 on Jul 15,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:48 on Jul 15,2026
+# vcom -reportprogress 300 -93 src/top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity top
+# -- Compiling architecture Structural of top
+# End time: 20:17:48 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# >>> Source files OK
+# >>> Compiling testbenches...
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:48 on Jul 15,2026
+# vcom -reportprogress 300 -93 tb/tb_uart_tx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_uart_tx
+# -- Compiling architecture sim of tb_uart_tx
+# End time: 20:17:48 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:48 on Jul 15,2026
+# vcom -reportprogress 300 -93 tb/tb_uart_rx.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_uart_rx
+# -- Compiling architecture sim of tb_uart_rx
+# End time: 20:17:48 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:48 on Jul 15,2026
+# vcom -reportprogress 300 -93 tb/tb_spi_master.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_spi_master
+# -- Compiling architecture sim of tb_spi_master
+# End time: 20:17:48 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:48 on Jul 15,2026
+# vcom -reportprogress 300 -93 tb/tb_pwm_gen.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_pwm_gen
+# -- Compiling architecture sim of tb_pwm_gen
+# End time: 20:17:49 on Jul 15,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vcom 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 20:17:49 on Jul 15,2026
+# vcom -reportprogress 300 -93 tb/tb_top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_top
+# -- Compiling architecture sim of tb_top
+# End time: 20:17:49 on Jul 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# >>> Testbenches OK
+# 
+#   ================================================
+#   Compilation successful! Commands:
+# 
+#     run_uart_tx      -> UART TX test
+#     run_uart_rx      -> UART RX test
+#     run_spi          -> SPI Master test
+#     run_pwm          -> PWM test
+#     run_integration  -> full system test
+#     run_all          -> all unit tests
+#   ================================================

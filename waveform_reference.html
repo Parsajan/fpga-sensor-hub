@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ModelSim Waveform Reference</title>
+<style>
+  :root{
+    --bg:#fafafa; --card:#ffffff; --border:#e3e3e0; --border-soft:#ececea;
+    --text:#1d1d1b; --text-2:#5f5f5a; --text-3:#8a8a85;
+    --ok-bg:#e7f3e1; --ok-tx:#2f6d1f;
+    --warn-bg:#fbeed7; --warn-tx:#8a5a10;
+    --err-bg:#fbe4e2; --err-tx:#a23028;
+    --accent:#3a6bd4; --mono:'SFMono-Regular',Consolas,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);padding:24px 16px 60px;}
+  .wrap{max-width:760px;margin:0 auto}
+  h1{font-size:18px;font-weight:600;margin-bottom:4px}
+  .lead{font-size:13px;color:var(--text-2);margin-bottom:18px}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:10}
+  .tab{padding:6px 16px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:.15s}
+  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:500}
+  .tab:hover:not(.active){border-color:var(--accent)}
+  .pane{display:none}
+  .pane.active{display:block;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .card h2{font-size:14px;font-weight:600;margin-bottom:3px}
+  .card .sub{font-size:11.5px;color:var(--text-3);margin-bottom:14px}
+  svg{width:100%;height:auto;display:block;overflow:visible}
+  .section-title{font-size:11px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;margin:16px 0 8px}
+  .check{font-size:13px;color:var(--text-2);margin:7px 0;display:flex;gap:8px;align-items:flex-start;line-height:1.55}
+  .ic{flex-shrink:0;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px}
+  .ic.ok{background:var(--ok-bg);color:var(--ok-tx)}
+  .ic.warn{background:var(--warn-bg);color:var(--warn-tx)}
+  .ic.err{background:var(--err-bg);color:var(--err-tx)}
+  .mono{font-family:var(--mono);font-size:12px;background:#f1f1ef;padding:1px 6px;border-radius:4px}
+  .transcript{background:#1a1a1a;border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:12px;line-height:1.8;overflow-x:auto;margin-top:8px}
+  .transcript .pass{color:#7ED77E}
+  .transcript .info{color:#8FB8E8}
+  .transcript .cmt{color:#8a8a8a}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ModelSim Waveform Reference</h1>
+  <div class="lead">Expected signal behavior and Transcript output for each testbench</div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="uart_tx">UART TX</button>
+    <button class="tab" data-tab="uart_rx">UART RX</button>
+    <button class="tab" data-tab="spi">SPI Master</button>
+    <button class="tab" data-tab="pwm">PWM</button>
+  </div>
+
+  <!-- ===================== UART TX ===================== -->
+  <div class="pane active" id="pane-uart_tx">
+    <div class="card">
+      <h2>UART TX — Sending byte 0x41 ('A')</h2>
+      <div class="sub">Frame: Start bit + 8 data bits (LSB first) + Stop bit</div>
+      <svg viewBox="0 0 620 175">
+        <text x="4" y="20" style="font-size:10px;fill:#8a8a85;font-family:monospace">CLK</text>
+        <path d="M60 26 L60 12 L70 12 L70 26 L80 26 L80 12 L90 12 L90 26 L100 26 L100 12 L110 12 L110 26" fill="none" stroke="#ccc" stroke-width="1"/>
+        <text style="font-size:9px;fill:#8a8a85;font-family:monospace" x="115" y="22">100 MHz</text>
+
+        <text x="4" y="56" style="font-size:10px;fill:#8a8a85;font-family:monospace">TX_START</text>
+        <path d="M60 58 L60 44 L72 44 L72 58 L580 58" fill="none" stroke="#3B8BD4" stroke-width="1.5"/>
+        <text style="font-size:9px;fill:#3B8BD4;font-family:monospace" x="76" y="42">1-clk pulse</text>
+
+        <text x="4" y="100" style="font-size:10px;fill:#8a8a85;font-family:monospace">TX_PIN</text>
+        <path d="M60 90 L80 90" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M80 90 L80 108 L130 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M130 108 L130 90 L180 90" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M180 90 L180 108 L230 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M230 108 L280 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M280 108 L330 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M330 108 L380 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M380 108 L430 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M430 108 L430 90 L480 90" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M480 90 L480 108 L530 108" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M530 108 L530 90 L580 90" fill="none" stroke="#3B6D11" stroke-width="2"/>
+
+        <text style="font-size:9px;fill:#8a8a85;text-anchor:middle;font-family:monospace" x="105" y="122">START</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="155" y="122">1</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="205" y="122">0</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="255" y="122">0</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="305" y="122">0</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="355" y="122">0</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="405" y="122">0</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="455" y="122">1</text>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="505" y="122">0</text>
+        <text style="font-size:9px;fill:#8a8a85;text-anchor:middle;font-family:monospace" x="555" y="122">STOP</text>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="155" y="134">bit0 (LSB)</text>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="505" y="134">bit7 (MSB)</text>
+
+        <text x="4" y="154" style="font-size:10px;fill:#8a8a85;font-family:monospace">TX_BUSY</text>
+        <path d="M60 158 L80 158 L80 146 L530 146 L530 158 L580 158" fill="none" stroke="#854F0B" stroke-width="1.5"/>
+
+        <text x="4" y="170" style="font-size:9px;fill:#8a8a85;font-family:monospace">TX_DONE</text>
+        <path d="M60 168 L530 168 L530 160 L540 160 L540 168 L580 168" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="section-title">What to look for</div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">TX_PIN = '1'</span> at idle, before <span class="mono">TX_START</span> fires</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">TX_BUSY</span> goes high immediately after <span class="mono">TX_START</span></span></div>
+    <div class="check"><span class="ic ok">✓</span><span>First fall of <span class="mono">TX_PIN</span> to <span class="mono">'0'</span> = start bit, lasting exactly 8.68 µs</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>For 0x41: bit order is <span class="mono">1,0,0,0,0,0,1,0</span> (LSB first)</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>Last bit is the stop bit: <span class="mono">TX_PIN = '1'</span></span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">TX_DONE</span> pulses high for exactly one clock cycle</span></div>
+    <div class="check"><span class="ic err">✗</span><span>If <span class="mono">TX_PIN</span> glitches mid-bit → check the baud generator</span></div>
+    <div class="check"><span class="ic err">✗</span><span>If <span class="mono">TX_BUSY</span> drops before the stop bit → FSM bug</span></div>
+
+    <div class="section-title">Expected Transcript output</div>
+    <div class="transcript">
+<span class="pass"># [PASS] idle: tx_pin='1'</span><br>
+<span class="cmt"># --- test 1: send 0x41 (A) ---</span><br>
+<span class="pass"># [PASS] tx_busy=1 confirmed</span><br>
+<span class="info"># [MON] received: 0x41</span><br>
+<span class="pass"># [PASS] test 1 done: sent 0x41</span><br>
+<span class="cmt"># --- test 2: send 5 bytes ---</span><br>
+<span class="pass"># [PASS] byte 0 = 0x41 sent</span><br>
+<span class="pass"># [PASS] byte 1 = 0x42 sent</span><br>
+<span class="pass">...</span><br>
+<span class="pass"># === ALL uart_tx TESTS PASSED ===</span>
+    </div>
+  </div>
+
+  <!-- ===================== UART RX ===================== -->
+  <div class="pane" id="pane-uart_rx">
+    <div class="card">
+      <h2>UART RX — Receiving and mid-bit sampling</h2>
+      <div class="sub">Key idea: receiver samples the MIDDLE of each bit, not the edge</div>
+      <svg viewBox="0 0 620 150">
+        <text x="4" y="30" style="font-size:10px;fill:#8a8a85;font-family:monospace">RX_PIN</text>
+        <path d="M60 24 L100 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M100 24 L100 42 L150 42" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M150 42 L150 24 L200 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M200 24 L200 42 L250 42" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M250 42 L250 24 L300 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M300 24 L300 42 L350 42" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M350 42 L350 24 L400 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M400 24 L400 42 L450 42" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M450 42 L450 24 L500 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M500 24 L500 42 L550 42" fill="none" stroke="#A32D2D" stroke-width="2"/>
+        <path d="M550 42 L550 24 L600 24" fill="none" stroke="#3B6D11" stroke-width="2"/>
+
+        <circle cx="125" cy="42" r="4" fill="none" stroke="#854F0B" stroke-width="1.5"/>
+        <text style="font-size:8px;fill:#854F0B;text-anchor:middle" x="125" y="58">verify START</text>
+        <circle cx="175" cy="24" r="4" fill="#0F6E56"/>
+        <circle cx="225" cy="42" r="4" fill="#993C1D"/>
+        <circle cx="275" cy="24" r="4" fill="#0F6E56"/>
+        <circle cx="325" cy="42" r="4" fill="#993C1D"/>
+        <circle cx="375" cy="24" r="4" fill="#0F6E56"/>
+        <circle cx="425" cy="42" r="4" fill="#993C1D"/>
+        <circle cx="475" cy="24" r="4" fill="#0F6E56"/>
+        <circle cx="525" cy="42" r="4" fill="#993C1D"/>
+
+        <text x="4" y="96" style="font-size:10px;fill:#8a8a85;font-family:monospace">RX_SYNC2</text>
+        <path d="M60 90 L102 90 L102 108 L152 108 L152 90 L202 90 L202 108 L252 108 L252 90 L302 90 L302 108 L352 108 L352 90 L402 90 L402 108 L452 108 L452 90 L502 90 L502 108 L552 108 L552 90 L600 90" fill="none" stroke="#ccc" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text style="font-size:8px;fill:#8a8a85" x="62" y="86">2-clk sync delay</text>
+
+        <text x="4" y="128" style="font-size:10px;fill:#8a8a85;font-family:monospace">STATE</text>
+        <rect x="100" y="118" width="50" height="12" rx="3" fill="#f1f1ef" stroke="#ddd" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="125" y="127">START</text>
+        <rect x="150" y="118" width="360" height="12" rx="3" fill="#e6f1fb" stroke="#bcd" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#185FA5;text-anchor:middle;font-family:monospace" x="330" y="127">DATA (8 bits)</text>
+        <rect x="510" y="118" width="40" height="12" rx="3" fill="#e7f3e1" stroke="#bcd9b0" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#2f6d1f;text-anchor:middle;font-family:monospace" x="530" y="127">STOP</text>
+
+        <text x="4" y="145" style="font-size:10px;fill:#8a8a85;font-family:monospace">RX_VALID</text>
+        <path d="M60 142 L548 142 L548 136 L558 136 L558 142 L600 142" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+      </svg>
+    </div>
+
+    <div class="section-title">What to look for</div>
+    <div class="check"><span class="ic ok">✓</span><span>After <span class="mono">RX_PIN</span> falls, <span class="mono">STATE</span> moves to <span class="mono">START</span></span></div>
+    <div class="check"><span class="ic ok">✓</span><span>Sampling happens exactly at <span class="mono">HALF_BAUD_DIV = 434</span> clocks (mid-bit)</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>Green dots = bit sampled as '1', red dots = bit sampled as '0'</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>After 8 bits, <span class="mono">RX_VALID</span> pulses high and <span class="mono">RX_DATA = 0x55</span></span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">RX_SYNC2</span> lags <span class="mono">RX_PIN</span> by 2 clock cycles (double-flop synchronizer)</span></div>
+    <div class="check"><span class="ic warn">!</span><span>Glitch test: a pulse shorter than 434 clocks should NOT move state out of IDLE</span></div>
+    <div class="check"><span class="ic err">✗</span><span>If <span class="mono">RX_DATA</span> is wrong → check baud divider or sampling point</span></div>
+
+    <div class="section-title">Expected Transcript output</div>
+    <div class="transcript">
+<span class="cmt"># --- test 1: send 0x55 ---</span><br>
+<span class="pass"># [PASS] test 1: received 0x55</span><br>
+<span class="pass"># [PASS] test 2: received 0x00</span><br>
+<span class="pass"># [PASS] test 3: received 0xFF</span><br>
+<span class="cmt"># --- test 4: glitch (50ns, must be ignored) ---</span><br>
+<span class="pass"># [PASS] test 4: glitch ignored correctly</span><br>
+<span class="pass"># [PASS] received 0x48 (H)</span><br>
+<span class="pass"># === ALL uart_rx TESTS PASSED ===</span>
+    </div>
+  </div>
+
+  <!-- ===================== SPI ===================== -->
+  <div class="pane" id="pane-spi">
+    <div class="card">
+      <h2>SPI Master — TX=0xD0, RX=0x60 (BME280 CHIP_ID)</h2>
+      <div class="sub">Mode 0: CPOL=0, CPHA=0 — sample on rising edge, shift on falling edge</div>
+      <svg viewBox="0 0 620 180">
+        <text x="4" y="22" style="font-size:10px;fill:#8a8a85;font-family:monospace">CS_N</text>
+        <path d="M60 16 L100 16 L100 30 L520 30 L520 16 L580 16" fill="none" stroke="#A32D2D" stroke-width="1.5"/>
+        <text style="font-size:9px;fill:#A32D2D;text-anchor:middle;font-family:monospace" x="310" y="26">LOW = slave selected</text>
+
+        <text x="4" y="54" style="font-size:10px;fill:#8a8a85;font-family:monospace">SCLK</text>
+        <path d="M60 56 L100 56" fill="none" stroke="#ccc" stroke-width="1.5"/>
+        <path d="M100 56 L100 42 L127 42 L127 56 L154 56 L154 42 L181 42 L181 56 L208 56 L208 42 L235 42 L235 56 L262 56 L262 42 L289 42 L289 56 L316 56 L316 42 L343 42 L343 56 L370 56 L370 42 L397 42 L397 56 L424 56 L424 42 L451 42 L451 56 L478 56 L478 42 L505 42 L505 56 L520 56" fill="none" stroke="#534AB7" stroke-width="1.5"/>
+        <text style="font-size:8px;fill:#534AB7;text-anchor:middle" x="113" y="38">↑ sample</text>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="140" y="70">↓ shift</text>
+
+        <text x="4" y="90" style="font-size:10px;fill:#8a8a85;font-family:monospace">MOSI</text>
+        <path d="M60 84 L100 84 L100 78 L127 78" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M127 78 L154 78" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M154 78 L154 90 L181 90" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <path d="M181 90 L181 78 L208 78" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M208 78 L208 90 L370 90" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <path d="M370 90 L520 90" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="113" y="74">1</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="140" y="74">1</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="167" y="98">0</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="194" y="74">1</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle" x="300" y="98">0 0 0 0</text>
+        <text style="font-size:8px;fill:#534AB7;text-anchor:start" x="532" y="88">0xD0</text>
+
+        <text x="4" y="122" style="font-size:10px;fill:#8a8a85;font-family:monospace">MISO</text>
+        <path d="M60 124 L127 124" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <path d="M127 124 L127 112 L154 112" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M154 112 L181 112" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M181 112 L181 124 L520 124" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="113" y="138">0</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="140" y="108">1</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle;font-family:monospace" x="167" y="108">1</text>
+        <text style="font-size:8px;fill:#5f5f5a;text-anchor:middle" x="350" y="138">0 0 0 0 0</text>
+        <text style="font-size:8px;fill:#185FA5;text-anchor:start" x="532" y="122">0x60</text>
+
+        <text x="4" y="152" style="font-size:10px;fill:#8a8a85;font-family:monospace">DONE</text>
+        <path d="M60 154 L520 154 L520 146 L535 146 L535 154 L580 154" fill="none" stroke="#185FA5" stroke-width="1.5"/>
+
+        <text x="4" y="168" style="font-size:10px;fill:#8a8a85;font-family:monospace">STATE</text>
+        <rect x="60" y="160" width="40" height="14" rx="3" fill="#f1f1ef" stroke="#ddd" stroke-width="0.5"/>
+        <text style="font-size:7px;fill:#8a8a85;text-anchor:middle;font-family:monospace" x="80" y="170">IDLE</text>
+        <rect x="100" y="160" width="50" height="14" rx="3" fill="#f1f1ef" stroke="#ddd" stroke-width="0.5"/>
+        <text style="font-size:7px;fill:#8a8a85;text-anchor:middle;font-family:monospace" x="125" y="170">ASSERT_CS</text>
+        <rect x="150" y="160" width="370" height="14" rx="3" fill="#e6f1fb" stroke="#bcd" stroke-width="0.5"/>
+        <text style="font-size:7px;fill:#185FA5;text-anchor:middle;font-family:monospace" x="335" y="170">TRANSFER</text>
+        <rect x="520" y="160" width="60" height="14" rx="3" fill="#e7f3e1" stroke="#bcd9b0" stroke-width="0.5"/>
+        <text style="font-size:7px;fill:#2f6d1f;text-anchor:middle;font-family:monospace" x="550" y="170">DEASSERT</text>
+      </svg>
+    </div>
+
+    <div class="section-title">What to look for</div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">CS_N</span> goes low before <span class="mono">SCLK</span> starts toggling</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">SCLK</span> idles at <span class="mono">'0'</span> (confirms Mode 0)</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>Exactly 8 full <span class="mono">SCLK</span> pulses for 8 data bits</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">MOSI = 1,1,0,1,0,0,0,0</span> = 0xD0 (MSB first)</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">MISO = 0,1,1,0,0,0,0,0</span> = 0x60 returned by slave model</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>After the last clock, <span class="mono">CS_N</span> goes high and <span class="mono">DONE</span> pulses for one cycle</span></div>
+    <div class="check"><span class="ic err">✗</span><span>If <span class="mono">CS_N</span> rises at the same time as the last <span class="mono">SCLK</span> edge → timing bug</span></div>
+
+    <div class="section-title">Expected Transcript output</div>
+    <div class="transcript">
+<span class="pass"># [PASS] initial state: CS_N='1', SCLK='0' (Mode 0 ok)</span><br>
+<span class="cmt"># --- test 1: send 0xD0, expect RX=0x60 ---</span><br>
+<span class="info"># [SLAVE] received: 0xD0  sent: 0x60</span><br>
+<span class="pass"># [PASS] test 1: RX = 0x60 (CHIP_ID ok)</span><br>
+<span class="pass"># [PASS] busy='1' during transfer</span><br>
+<span class="pass"># === ALL spi_master TESTS PASSED ===</span>
+    </div>
+  </div>
+
+  <!-- ===================== PWM ===================== -->
+  <div class="pane" id="pane-pwm">
+    <div class="card">
+      <h2>PWM Generator — duty cycle comparison</h2>
+      <div class="sub">Each row = one full PWM period (1000 clocks at sim CLK_FREQ=1MHz)</div>
+      <svg viewBox="0 0 620 200">
+        <text x="4" y="24" style="font-size:10px;fill:#8a8a85;font-family:monospace">duty=0x00</text>
+        <text style="font-size:9px;fill:#993C1D" x="4" y="36">OFF</text>
+        <path d="M100 28 L580 28" fill="none" stroke="#993C1D" stroke-width="2"/>
+        <path d="M100 20 L100 36 L580 36 L580 20 L100 20Z" fill="#FAECE7" opacity="0.4"/>
+
+        <text x="4" y="60" style="font-size:10px;fill:#8a8a85;font-family:monospace">duty=0xFF</text>
+        <text style="font-size:9px;fill:#3B6D11" x="4" y="72">FULL ON</text>
+        <path d="M100 56 L580 56" fill="none" stroke="#3B6D11" stroke-width="2"/>
+        <path d="M100 48 L100 64 L580 64 L580 48 L100 48Z" fill="#EAF3DE" opacity="0.5"/>
+
+        <text x="4" y="100" style="font-size:10px;fill:#8a8a85;font-family:monospace">duty=0x80</text>
+        <text style="font-size:9px;fill:#185FA5" x="4" y="112">50%</text>
+        <path d="M100 96 L340 96 L340 112 L580 112 L580 96" fill="none" stroke="#185FA5" stroke-width="2"/>
+        <path d="M100 88 L100 96 L340 96 L340 88 L100 88Z" fill="#E6F1FB" opacity="0.7"/>
+        <path d="M100 118 L340 118" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M100 115 L100 121" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M340 115 L340 121" stroke="#8a8a85" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="220" y="128">500 µs HIGH</text>
+        <path d="M340 118 L580 118" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M580 115 L580 121" stroke="#8a8a85" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="460" y="128">500 µs LOW</text>
+
+        <text x="4" y="152" style="font-size:10px;fill:#8a8a85;font-family:monospace">duty=0x40</text>
+        <text style="font-size:9px;fill:#854F0B" x="4" y="164">25%</text>
+        <path d="M100 148 L220 148 L220 164 L580 164 L580 148" fill="none" stroke="#854F0B" stroke-width="2"/>
+        <path d="M100 140 L100 148 L220 148 L220 140 L100 140Z" fill="#FAEEDA" opacity="0.7"/>
+        <path d="M100 170 L220 170" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M100 167 L100 173" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M220 167 L220 173" stroke="#8a8a85" stroke-width="0.5"/>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="160" y="182">25% HIGH</text>
+        <text style="font-size:8px;fill:#8a8a85;text-anchor:middle" x="400" y="182">75% LOW</text>
+
+        <path d="M100 192 L580 192" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M100 189 L100 195" stroke="#8a8a85" stroke-width="0.5"/>
+        <path d="M580 189 L580 195" stroke="#8a8a85" stroke-width="0.5"/>
+        <text style="font-size:9px;fill:#5f5f5a;text-anchor:middle" x="340" y="200">one PWM period = 1 ms (sim CLK_FREQ = 1 MHz)</text>
+      </svg>
+    </div>
+
+    <div class="section-title">What to look for</div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">duty=0x00</span>: output stays '0' the entire period, never toggles</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">duty=0xFF</span>: output stays '1' the entire period</span></div>
+    <div class="check"><span class="ic ok">✓</span><span><span class="mono">duty=0x80</span>: exactly half the period HIGH, half LOW</span></div>
+    <div class="check"><span class="ic ok">✓</span><span>The measure process in the Transcript should report <span class="mono">percent=50%</span></span></div>
+    <div class="check"><span class="ic ok">✓</span><span>After mid-cycle reset: <span class="mono">pwm_out = '0'</span> and the counter restarts from zero</span></div>
+    <div class="check"><span class="ic warn">!</span><span>During dynamic duty changes, one transitional period may look slightly off — that's expected</span></div>
+
+    <div class="section-title">Expected Transcript output</div>
+    <div class="transcript">
+<span class="cmt"># --- test 1: duty=0x00 ---</span><br>
+<span class="pass"># [PASS] test 1: duty=0, output='0'</span><br>
+<span class="pass"># [PASS] test 2: duty=255, output='1'</span><br>
+<span class="info"># [MEASURE] duty=128  high_clks=500/1000  percent=50%</span><br>
+<span class="info"># [MEASURE] duty=64  high_clks=250/1000  percent=25%</span><br>
+<span class="pass"># [PASS] test 6: reset ok</span><br>
+<span class="pass"># === ALL pwm_gen TESTS PASSED ===</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('pane-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
